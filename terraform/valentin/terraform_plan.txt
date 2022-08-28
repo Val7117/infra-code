@@ -1,0 +1,256 @@
+[0m# aws_instance.valentin_ubuntu:
+resource "aws_instance" "valentin_ubuntu" {
+    [1m[0mami[0m[0m                                  = "ami-07702eb3b2ef420a9"
+    [1m[0marn[0m[0m                                  = "arn:aws:ec2:eu-west-1:814517281194:instance/i-05c91e8d922022737"
+    [1m[0massociate_public_ip_address[0m[0m          = true
+    [1m[0mavailability_zone[0m[0m                    = "eu-west-1a"
+    [1m[0mcpu_core_count[0m[0m                       = 1
+    [1m[0mcpu_threads_per_core[0m[0m                 = 2
+    [1m[0mdisable_api_stop[0m[0m                     = false
+    [1m[0mdisable_api_termination[0m[0m              = false
+    [1m[0mebs_optimized[0m[0m                        = false
+    [1m[0mget_password_data[0m[0m                    = false
+    [1m[0mhibernation[0m[0m                          = false
+    [1m[0mid[0m[0m                                   = "i-05c91e8d922022737"
+    [1m[0minstance_initiated_shutdown_behavior[0m[0m = "stop"
+    [1m[0minstance_state[0m[0m                       = "running"
+    [1m[0minstance_type[0m[0m                        = "t3.micro"
+    [1m[0mipv6_address_count[0m[0m                   = 0
+    [1m[0mipv6_addresses[0m[0m                       = []
+    [1m[0mkey_name[0m[0m                             = "Valentin"
+    [1m[0mmonitoring[0m[0m                           = false
+    [1m[0mprimary_network_interface_id[0m[0m         = "eni-0800d0ca24567c162"
+    [1m[0mprivate_dns[0m[0m                          = "ip-172-31-17-224.eu-west-1.compute.internal"
+    [1m[0mprivate_ip[0m[0m                           = "172.31.17.224"
+    [1m[0mpublic_dns[0m[0m                           = "ec2-54-171-49-115.eu-west-1.compute.amazonaws.com"
+    [1m[0mpublic_ip[0m[0m                            = "54.171.49.115"
+    [1m[0msecondary_private_ips[0m[0m                = []
+    [1m[0msecurity_groups[0m[0m                      = [
+        "launch-wizard-1",
+    ]
+    [1m[0msource_dest_check[0m[0m                    = true
+    [1m[0msubnet_id[0m[0m                            = "subnet-0b0abf43"
+    [1m[0mtags[0m[0m                                 = {
+        "Name" = "ValentinEC2"
+    }
+    [1m[0mtags_all[0m[0m                             = {
+        "Name" = "ValentinEC2"
+    }
+    [1m[0mtenancy[0m[0m                              = "default"
+    [1m[0muser_data_replace_on_change[0m[0m          = false
+    [1m[0mvpc_security_group_ids[0m[0m               = [
+        "sg-034b696f6e005260e",
+    ]
+
+    capacity_reservation_specification {
+        [1m[0mcapacity_reservation_preference[0m[0m = "open"
+    }
+
+    credit_specification {
+        [1m[0mcpu_credits[0m[0m = "unlimited"
+    }
+
+    enclave_options {
+        [1m[0menabled[0m[0m = false
+    }
+
+    maintenance_options {
+        [1m[0mauto_recovery[0m[0m = "default"
+    }
+
+    metadata_options {
+        [1m[0mhttp_endpoint[0m[0m               = "enabled"
+        [1m[0mhttp_put_response_hop_limit[0m[0m = 1
+        [1m[0mhttp_tokens[0m[0m                 = "optional"
+        [1m[0minstance_metadata_tags[0m[0m      = "disabled"
+    }
+
+    private_dns_name_options {
+        [1m[0menable_resource_name_dns_a_record[0m[0m    = false
+        [1m[0menable_resource_name_dns_aaaa_record[0m[0m = false
+        [1m[0mhostname_type[0m[0m                        = "ip-name"
+    }
+
+    root_block_device {
+        [1m[0mdelete_on_termination[0m[0m = true
+        [1m[0mdevice_name[0m[0m           = "/dev/sda1"
+        [1m[0mencrypted[0m[0m             = false
+        [1m[0miops[0m[0m                  = 100
+        [1m[0mtags[0m[0m                  = {}
+        [1m[0mthroughput[0m[0m            = 0
+        [1m[0mvolume_id[0m[0m             = "vol-0fdd8cc52e0c60abc"
+        [1m[0mvolume_size[0m[0m           = 8
+        [1m[0mvolume_type[0m[0m           = "gp2"
+    }
+}
+
+# aws_route53_record.valentin_dns_record:
+resource "aws_route53_record" "valentin_dns_record" {
+    [1m[0mfqdn[0m[0m    = "www.valentinec2.com"
+    [1m[0mid[0m[0m      = "Z038130229SD0L7E1Y6RD_www.valentinec2.com_A"
+    [1m[0mname[0m[0m    = "www.valentinec2.com"
+    [1m[0mrecords[0m[0m = [
+        "54.171.49.115",
+    ]
+    [1m[0mttl[0m[0m     = 300
+    [1m[0mtype[0m[0m    = "A"
+    [1m[0mzone_id[0m[0m = "Z038130229SD0L7E1Y6RD"
+}
+
+# aws_route53_zone.valentinec2:
+resource "aws_route53_zone" "valentinec2" {
+    [1m[0marn[0m[0m           = "arn:aws:route53:::hostedzone/Z038130229SD0L7E1Y6RD"
+    [1m[0mcomment[0m[0m       = "Managed by Terraform"
+    [1m[0mforce_destroy[0m[0m = false
+    [1m[0mid[0m[0m            = "Z038130229SD0L7E1Y6RD"
+    [1m[0mname[0m[0m          = "www.valentinec2.com"
+    [1m[0mname_servers[0m[0m  = [
+        "ns-1247.awsdns-27.org",
+        "ns-1815.awsdns-34.co.uk",
+        "ns-267.awsdns-33.com",
+        "ns-854.awsdns-42.net",
+    ]
+    [1m[0mtags[0m[0m          = {}
+    [1m[0mtags_all[0m[0m      = {}
+    [1m[0mzone_id[0m[0m       = "Z038130229SD0L7E1Y6RD"
+}
+
+# data.aws_ami.ubuntu:
+data "aws_ami" "ubuntu" {
+    [1m[0marchitecture[0m[0m          = "x86_64"
+    [1m[0marn[0m[0m                   = "arn:aws:ec2:eu-west-1::image/ami-07702eb3b2ef420a9"
+    [1m[0mblock_device_mappings[0m[0m = [
+        {
+            device_name  = "/dev/sda1"
+            ebs          = {
+                "delete_on_termination" = "true"
+                "encrypted"             = "false"
+                "iops"                  = "0"
+                "snapshot_id"           = "snap-0b8841d0ef5d1d5ef"
+                "throughput"            = "0"
+                "volume_size"           = "8"
+                "volume_type"           = "gp2"
+            }
+            no_device    = ""
+            virtual_name = ""
+        },
+        {
+            device_name  = "/dev/sdb"
+            ebs          = {}
+            no_device    = ""
+            virtual_name = "ephemeral0"
+        },
+        {
+            device_name  = "/dev/sdc"
+            ebs          = {}
+            no_device    = ""
+            virtual_name = "ephemeral1"
+        },
+    ]
+    [1m[0mcreation_date[0m[0m         = "2022-08-10T12:41:15.000Z"
+    [1m[0mdeprecation_time[0m[0m      = "2024-08-10T12:41:15.000Z"
+    [1m[0mdescription[0m[0m           = "Canonical, Ubuntu, 20.04 LTS, amd64 focal image build on 2022-08-10"
+    [1m[0mena_support[0m[0m           = true
+    [1m[0mhypervisor[0m[0m            = "xen"
+    [1m[0mid[0m[0m                    = "ami-07702eb3b2ef420a9"
+    [1m[0mimage_id[0m[0m              = "ami-07702eb3b2ef420a9"
+    [1m[0mimage_location[0m[0m        = "099720109477/ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-20220810"
+    [1m[0mimage_type[0m[0m            = "machine"
+    [1m[0minclude_deprecated[0m[0m    = false
+    [1m[0mmost_recent[0m[0m           = true
+    [1m[0mname[0m[0m                  = "ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-20220810"
+    [1m[0mowner_id[0m[0m              = "099720109477"
+    [1m[0mowners[0m[0m                = [
+        "099720109477",
+    ]
+    [1m[0mplatform_details[0m[0m      = "Linux/UNIX"
+    [1m[0mproduct_codes[0m[0m         = []
+    [1m[0mpublic[0m[0m                = true
+    [1m[0mroot_device_name[0m[0m      = "/dev/sda1"
+    [1m[0mroot_device_type[0m[0m      = "ebs"
+    [1m[0mroot_snapshot_id[0m[0m      = "snap-0b8841d0ef5d1d5ef"
+    [1m[0msriov_net_support[0m[0m     = "simple"
+    [1m[0mstate[0m[0m                 = "available"
+    [1m[0mstate_reason[0m[0m          = {
+        "code"    = "UNSET"
+        "message" = "UNSET"
+    }
+    [1m[0mtags[0m[0m                  = {}
+    [1m[0musage_operation[0m[0m       = "RunInstances"
+    [1m[0mvirtualization_type[0m[0m   = "hvm"
+
+    filter {
+        [1m[0mname[0m[0m   = "name"
+        [1m[0mvalues[0m[0m = [
+            "ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-*",
+        ]
+    }
+    filter {
+        [1m[0mname[0m[0m   = "root-device-type"
+        [1m[0mvalues[0m[0m = [
+            "ebs",
+        ]
+    }
+    filter {
+        [1m[0mname[0m[0m   = "virtualization-type"
+        [1m[0mvalues[0m[0m = [
+            "hvm",
+        ]
+    }
+}
+
+# data.aws_security_groups.sgr1:
+data "aws_security_groups" "sgr1" {
+    [1m[0marns[0m[0m    = [
+        "arn:aws:ec2:eu-west-1:814517281194:security-group/sg-034b696f6e005260e",
+    ]
+    [1m[0mid[0m[0m      = "eu-west-1"
+    [1m[0mids[0m[0m     = [
+        "sg-034b696f6e005260e",
+    ]
+    [1m[0mtags[0m[0m    = {
+        "open" = "ssh"
+    }
+    [1m[0mvpc_ids[0m[0m = [
+        "vpc-51b02e37",
+    ]
+}
+
+# data.aws_subnets.ubuntu:
+data "aws_subnets" "ubuntu" {
+    [1m[0mid[0m[0m  = "eu-west-1"
+    [1m[0mids[0m[0m = [
+        "subnet-4f832429",
+        "subnet-0b0abf43",
+        "subnet-611dfb3b",
+    ]
+
+    filter {
+        [1m[0mname[0m[0m   = "vpc-id"
+        [1m[0mvalues[0m[0m = [
+            "vpc-51b02e37",
+        ]
+    }
+}
+
+# data.aws_vpcs.my_vpcs:
+data "aws_vpcs" "my_vpcs" {
+    [1m[0mid[0m[0m  = "eu-west-1"
+    [1m[0mids[0m[0m = [
+        "vpc-51b02e37",
+    ]
+}
+
+
+Outputs:
+
+ami = "ami-07702eb3b2ef420a9"
+my_vpcs = [
+    "vpc-51b02e37",
+]
+sg = [
+    "sg-034b696f6e005260e",
+]
+sgr1 = [
+    "sg-034b696f6e005260e",
+][0m[0m
