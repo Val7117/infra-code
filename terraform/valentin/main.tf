@@ -13,22 +13,14 @@ provider "aws" {
 data "aws_vpcs" "my_vpcs" {
 }
 
-<<<<<<< HEAD
 data "aws_security_groups" "sgr1" {
-=======
-data "aws_security_groups" "test" {
->>>>>>> 08ea1ed6ba0bc2b94a3903bbff0f406da9d66f25
   tags = {
     open = "ssh"
   }
 }
 
 output "sg" {
-<<<<<<< HEAD
   value = data.aws_security_groups.sgr1.ids
-=======
-  value = data.aws_security_groups.test.ids
->>>>>>> 08ea1ed6ba0bc2b94a3903bbff0f406da9d66f25
 }
 
 data "aws_ami" "ubuntu" {
@@ -56,11 +48,7 @@ resource "aws_instance" "valentin_ubuntu" {
   ami                         = data.aws_ami.ubuntu.image_id
   instance_type               = "t3.micro"
   key_name                    = "Valentin"
-<<<<<<< HEAD
   vpc_security_group_ids      = data.aws_security_groups.sgr1.ids
-=======
-  vpc_security_group_ids      = data.aws_security_groups.test.ids
->>>>>>> 08ea1ed6ba0bc2b94a3903bbff0f406da9d66f25
   associate_public_ip_address = true
 
   tags = {

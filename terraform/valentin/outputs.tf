@@ -3,11 +3,7 @@ output "my_vpcs" {
 }
 
 output "sgr1" {
-<<<<<<< HEAD
   value = data.aws_security_groups.sgr1.ids
-=======
-  value = data.aws_security_groups.test.ids
->>>>>>> 08ea1ed6ba0bc2b94a3903bbff0f406da9d66f25
 }
 
 output "ami" {
