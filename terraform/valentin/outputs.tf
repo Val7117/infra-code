@@ -1,11 +1,12 @@
-
-output "instance_id" {
-  description = "ID of the EC2 instance"
-  value       = aws_instance.app_server.id
+output "my_vpcs" {
+  value = data.aws_vpcs.my_vpcs.ids
 }
 
-output "instance_public_ip" {
-  description = "Public IP address of the EC2 instance"
-  value       = aws_instance.app_server.public_ip
+output "sgr1" {
+  value = data.aws_security_groups.test.ids
+}
+
+output "ami" {
+  value = data.aws_ami.ubuntu.image_id
 }
 
